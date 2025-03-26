@@ -9,11 +9,11 @@ wifi_device = "wlan0"  # Alterar conforme necessário para o seu dispositivo WiF
 @app.route('/')
 def home():
     options = [
-        {'name': 'Opção 1', 'route': '/opcao1'},
-        {'name': 'Opção 2', 'route': '/opcao2'},
-        {'name': 'Opção 3', 'route': '/opcao3'},
-        {'name': 'Opção 4', 'route': '/opcao4'},
-        {'name': 'Opção 5', 'route': '/opcao5'},
+        {'name': 'Configurar Wi-Fi', 'route': '/opcao1'},
+        {'name': 'Executar um comando de Shell', 'route': '/opcao2'},
+        {'name': 'Estabelecer conexão ssh', 'route': '/opcao3'},
+        {'name': 'Realizar scan de portas', 'route': '/opcao4'},
+        {'name': 'Realizar enumeração de hosts', 'route': '/opcao5'},
     ]
     return render_template('index.html', options=options)
 
