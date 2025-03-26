@@ -120,7 +120,7 @@ def opcao5():
         network = request.form['network']
         
         # Construindo o comando nmap
-        nmap_command = ["nmap -sP", network]
+        nmap_command = ["nmap", network, "-sP"]
         try:
             result = subprocess.check_output(nmap_command, stderr=subprocess.STDOUT)
             output = result.decode()
