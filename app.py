@@ -114,6 +114,24 @@ def opcao4():
     return render_template('nmap_input.html')
 
 
+@app.route('/opcao5', methods=['GET', 'POST'])
+def opcao4():
+    if request.method == 'POST':
+        network = request.form['network']
+        
+        # Construindo o comando nmap
+        nmap_command = ["nmap -sP", network, " | grep -oE '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'"]
+        try:
+            result = subprocess.check_output(nmap_command, stderr=subprocess.STDOUT)
+            output = result.decode()
+        except subprocess.CalledProcessError as e:
+            output = f"Erro ao executar nmap: {e.output.decode()}"
+        
+        return render_template('nmap_enum_output.html', output=output)
+    
+    return render_template('nmap_enum_input.html')
+
+
 @app.route('/submit', methods=['POST'])
 def submit():
     if request.method == 'POST':
