@@ -115,7 +115,7 @@ def opcao4():
 
 
 @app.route('/opcao5', methods=['GET', 'POST'])
-def opcao4():
+def opcao5():
     if request.method == 'POST':
         network = request.form['network']
         
