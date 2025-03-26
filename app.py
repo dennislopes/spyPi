@@ -95,6 +95,25 @@ def opcao3():
 
     return render_template('reverse_shell_input.html')
 
+@app.route('/opcao4', methods=['GET', 'POST'])
+def opcao4():
+    if request.method == 'POST':
+        host = request.form['host']
+        ports = request.form['ports']
+        
+        # Construindo o comando nmap
+        nmap_command = ["nmap", host, "-p", ports]
+        try:
+            result = subprocess.check_output(nmap_command, stderr=subprocess.STDOUT)
+            output = result.decode()
+        except subprocess.CalledProcessError as e:
+            output = f"Erro ao executar nmap: {e.output.decode()}"
+        
+        return render_template('nmap_output.html', output=output)
+    
+    return render_template('nmap_input.html')
+
+
 @app.route('/submit', methods=['POST'])
 def submit():
     if request.method == 'POST':
