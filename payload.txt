@@ -1,0 +1,7 @@
+GUI r
+DELAY
+STRING notepad
+ENTER
+DELAY
+STRING Hello from Rubber Ducky in Arduino!
+ENTER
