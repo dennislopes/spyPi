@@ -13,6 +13,13 @@ def hotspot_exists(connection_name):
     except Exception as e:
         return False
 
+def hotspot_is_active(connection_name):
+    try:
+        result = subprocess.run(["nmcli", "con", "show", "--active"], capture_output=True, text=True)
+        return connection_name in result.stdout
+    except Exception as e:
+        return False
+
 @app.route('/')
 def home():
     options = [
@@ -182,6 +189,7 @@ def submit():
         return "Erro: falha ao conectar."
 
 @app.route('/opcao6', methods=['GET', 'POST'])
+@app.route('/opcao6', methods=['GET', 'POST'])
 def opcao6():
     if request.method == 'POST':
         device = request.form['device']
@@ -190,7 +198,14 @@ def opcao6():
         connection_name = "my-hotspot"
 
         if hotspot_exists(connection_name):
-            return f"Hotspot '{connection_name}' já existe."
+            if hotspot_is_active(connection_name):
+                return f"Hotspot '{connection_name}' já está ativo."
+            else:
+                try:
+                    subprocess.run(["nmcli", "con", "up", connection_name], check=True)
+                    return f"Hotspot '{connection_name}' já existia e foi ativado novamente."
+                except subprocess.CalledProcessError as e:
+                    return f"Erro ao ativar hotspot: {e.stderr}"
         
         try:
             subprocess.run(["nmcli", "con", "add", "type", "wifi", "ifname", device, "con-name", connection_name, "autoconnect", "yes", "ssid", ssid], check=True)
