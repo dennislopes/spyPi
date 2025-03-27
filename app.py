@@ -36,7 +36,7 @@ def home():
 def opcao1():
     if request.method == 'POST':
         device = request.form['device']
-        ssids = {}
+        ssids = []
         try:
             result = subprocess.check_output([
                 "nmcli", "--colors", "no", "-m", "multiline", "--get-value", "SSID", "dev", "wifi", "list", "ifname", device
@@ -47,7 +47,7 @@ def opcao1():
 
         return render_template('wifi_list.html', ssids=ssids, device=device)
 
-    # Exibir a escolha da interface
+    # Quando o método é GET, apenas exibe o formulário de seleção
     return '''
         <form action="/opcao1" method="post">
             <label for="device">Escolha um adaptador WiFi:</label>
