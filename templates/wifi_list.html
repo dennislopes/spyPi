@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redes Wi-Fi Disponíveis</title>
+</head>
+<body>
+    <h1>Redes Wi-Fi disponíveis na interface {{ device }}</h1>
+    <form action="/submit" method="post">
+        <label for="ssid">Escolha uma rede WiFi:</label>
+        <select name="ssid" id="ssid">
+            {% if ssids %}
+                {% for ssid in ssids %}
+                    <option value="{{ ssid }}">{{ ssid }}</option>
+                {% endfor %}
+            {% else %}
+                <option value="">Nenhuma rede disponível</option>
+            {% endif %}
+        </select>
+        <p/>
+        <label for="password">Senha: <input type="password" name="password" /></label>
+        <p/>
+        <input type="submit" value="Conectar">
