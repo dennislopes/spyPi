@@ -1,38 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estabelecer Conexão SSH</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container">
-        <h1 class="mt-5">Estabelecer Conexão SSH</h1>
-        <form action="/opcao3" method="post">
-            <div class="form-group">
-                <label for="ip">Digite o IP do servidor:</label>
-                <input type="text" class="form-control" name="ip" id="ip" required>
-            </div>
-            <div class="form-group">
-                <label for="port">Digite a Porta:</label>
-                <input type="number" class="form-control" name="port" id="port" value="22" required>
-            </div>
-            <div class="form-group">
-                <label for="username">Nome de Usuário:</label>
-                <input type="text" class="form-control" name="username" id="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Senha:</label>
-                <input type="password" class="form-control" name="password" id="password" required>
-            </div>
-            <input type="submit" class="btn btn-primary" value="Conectar">
-        </form>
-        <a href="/" class="btn btn-secondary mt-3">Voltar</a>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+<form method="post">
+    <label for="ip">IP do Servidor Remoto:</label>
+    <input type="text" id="ip" name="ip" required>
+    <br>
+    <label for="port">Porta:</label>
+    <input type="text" id="port" name="port" required>
+    <br>
+    <input type="submit" value="Estabelecer Conexão">
+</form>

