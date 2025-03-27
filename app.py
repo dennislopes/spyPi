@@ -29,7 +29,7 @@ def index():
             result = subprocess.check_output([
                 "nmcli", "--colors", "no", "-m", "multiline", "--get-value", "SSID", "dev", "wifi", "list", "ifname", device
             ])
-            ssids[device] = result.decode().split('\n')
+            ssids[device] = [ssid.replace("SSID:", "").strip() for ssid in result.decode().split('\n') if ssid.strip()]
         except subprocess.CalledProcessError:
             ssids[device] = []
     
@@ -54,9 +54,7 @@ def index():
     
     for device, ssids_list in ssids.items():
         for ssid in ssids_list:
-            only_ssid = ssid.strip()
-            if only_ssid:
-                dropdown_display += f'<option class="{device}" value="{only_ssid}">{only_ssid}</option>'
+            dropdown_display += f'<option class="{device}" value="{ssid}">{ssid}</option>'
     
     dropdown_display += """
                 </select>
