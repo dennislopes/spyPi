@@ -1,4 +1,4 @@
-# Web Interface para Comandos de Rede e Sistema
+# spyPi - Interface web para hacking de redes com raspberry Pi
 
 Este projeto é uma aplicação web construída com Flask, permitindo executar uma série de comandos de rede e sistema em um Raspberry Pi ou computador. Ele oferece a capacidade de configurar Wi-Fi, executar comandos de shell, criar hotspots, realizar escaneamento de portas, enumeração de hosts e até abrir uma shell reversa.
 
@@ -17,11 +17,3 @@ Este projeto é uma aplicação web construída com Flask, permitindo executar u
 - Flask (`pip install flask`)
 - `nmcli` (ferramenta de linha de comando do NetworkManager)
 - `nmap` (ferramenta de escaneamento de redes)
-
-## Configuração
-
-1. **Instale o Flask:**
-   Se você ainda não tiver o Flask instalado, execute o comando abaixo para instalá-lo:
-
-   ```bash
-   pip install flask
