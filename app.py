@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
 import subprocess
-import paramiko
 import threading
 
 app = Flask(__name__)
@@ -30,7 +29,7 @@ def home():
     options = [
         {'name': 'Configurar Wi-Fi', 'route': '/opcao1'},
         {'name': 'Executar um comando de Shell', 'route': '/opcao2'},
-        {'name': 'Estabelecer conexão ssh', 'route': '/opcao3'},
+        {'name': 'Abrir uma shell reversa', 'route': '/opcao3'},
         {'name': 'Realizar scan de portas', 'route': '/opcao4'},
         {'name': 'Realizar enumeração de hosts', 'route': '/opcao5'},
         {'name': 'Criar hotspot', 'route': '/opcao6'},
