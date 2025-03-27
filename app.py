@@ -13,6 +13,13 @@ def hotspot_exists(connection_name):
     except Exception as e:
         return False
 
+def get_hotspot_interface(connection_name):
+    try:
+        result = subprocess.run(["nmcli", "-t", "-f", "GENERAL.DEVICES", "con", "show", connection_name], capture_output=True, text=True)
+        return result.stdout.strip()
+    except Exception as e:
+        return None
+
 @app.route('/')
 def home():
     options = [
@@ -163,13 +170,15 @@ def opcao5():
 @app.route('/opcao6', methods=['GET', 'POST'])
 def opcao6():
     if request.method == 'POST':
-        device = "wlan0"  # Interface fixa para o hotspot
+        device = request.form['device']
         ssid = "MyHotspot"
         password = "MinhaSenha123"
         connection_name = "my-hotspot"
 
         if hotspot_exists(connection_name):
-            subprocess.run(["nmcli", "con", "delete", connection_name], check=True)
+            current_device = get_hotspot_interface(connection_name)
+            if current_device:
+                subprocess.run(["nmcli", "con", "delete", connection_name], check=True)
 
         try:
             subprocess.run(["nmcli", "con", "add", "type", "wifi", "ifname", device, "con-name", connection_name, "autoconnect", "yes", "ssid", ssid], check=True)
@@ -183,6 +192,12 @@ def opcao6():
     
     return '''
         <form action="/opcao6" method="post">
+            <label for="device">Escolha um adaptador WiFi:</label>
+            <select name="device" id="device">
+                <option value="wlan0">wlan0</option>
+                <option value="wlan1">wlan1</option>
+            </select>
+            <p/>
             <input type="submit" value="Criar/Recriar Hotspot">
         </form>
     '''
