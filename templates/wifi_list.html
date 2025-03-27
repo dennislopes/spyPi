@@ -6,6 +6,9 @@
 <body>
     <h1>Redes Wi-Fi disponíveis na interface {{ device }}</h1>
     <form action="/submit" method="post">
+        <!-- Campo oculto para enviar o dispositivo selecionado -->
+        <input type="hidden" name="device" value="{{ device }}">
+        
         <label for="ssid">Escolha uma rede WiFi:</label>
         <select name="ssid" id="ssid">
             {% if ssids %}
@@ -20,3 +23,6 @@
         <label for="password">Senha: <input type="password" name="password" /></label>
         <p/>
         <input type="submit" value="Conectar">
+    </form>
+</body>
+</html>
