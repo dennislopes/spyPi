@@ -21,7 +21,7 @@ def home():
         {'name': 'Estabelecer conexão ssh', 'route': '/opcao3'},
         {'name': 'Realizar scan de portas', 'route': '/opcao4'},
         {'name': 'Realizar enumeração de hosts', 'route': '/opcao5'},
-        {'name': 'Criar hotspot', 'route': '/opcao5'},
+        {'name': 'Criar hotspot', 'route': '/opcao6'},
     ]
     return render_template('index.html', options=options)
 
