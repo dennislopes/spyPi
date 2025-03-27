@@ -22,10 +22,18 @@ def opcao1():
     return index()
 
 def index():
-    result = subprocess.check_output(["nmcli", "--colors", "no", "-m", "multiline", "--get-value", "SSID", "dev", "wifi", "list", "ifname", wifi_device])
-    ssids_list = result.decode().split('\n')
+    devices = ["wlan0", "wlan1"]
+    ssids = {}
+    for device in devices:
+        try:
+            result = subprocess.check_output([
+                "nmcli", "--colors", "no", "-m", "multiline", "--get-value", "SSID", "dev", "wifi", "list", "ifname", device
+            ])
+            ssids[device] = result.decode().split('\n')
+        except subprocess.CalledProcessError:
+            ssids[device] = []
     
-    dropdowndisplay = f"""
+    dropdown_display = """
         <!DOCTYPE html>
         <html>
         <head>
@@ -34,28 +42,43 @@ def index():
         <body>
             <h1>Wifi Control</h1>
             <form action="/submit" method="post">
+                <label for="device">Escolha um adaptador WiFi:</label>
+                <select name="device" id="device" onchange="updateSSIDList()">
+                    <option value="wlan0">wlan0</option>
+                    <option value="wlan1">wlan1</option>
+                </select>
+                <p/>
                 <label for="ssid">Escolha uma rede WiFi:</label>
                 <select name="ssid" id="ssid">
     """
     
-    for ssid in ssids_list:
-        only_ssid = ssid.removeprefix("SSID:")
-        if len(only_ssid) > 0:
-            dropdowndisplay += f"""
-                    <option value="{only_ssid}">{only_ssid}</option>
-            """
+    for device, ssids_list in ssids.items():
+        for ssid in ssids_list:
+            only_ssid = ssid.strip()
+            if only_ssid:
+                dropdown_display += f'<option class="{device}" value="{only_ssid}">{only_ssid}</option>'
     
-    dropdowndisplay += f"""
+    dropdown_display += """
                 </select>
                 <p/>
                 <label for="password">Senha: <input type="password" name="password"/></label>
                 <p/>
                 <input type="submit" value="Conectar">
             </form>
+            <script>
+                function updateSSIDList() {
+                    var selectedDevice = document.getElementById("device").value;
+                    var options = document.getElementById("ssid").options;
+                    for (var i = 0; i < options.length; i++) {
+                        options[i].style.display = options[i].classList.contains(selectedDevice) ? "block" : "none";
+                    }
+                }
+                window.onload = updateSSIDList;
+            </script>
         </body>
         </html>
     """
-    return dropdowndisplay
+    return dropdown_display
 
 @app.route('/opcao2', methods=['GET', 'POST'])
 def opcao2():
