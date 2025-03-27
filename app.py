@@ -83,7 +83,14 @@ def opcao3():
             # Executa o comando
             result = subprocess.run(command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             output = result.stdout.decode() + result.stderr.decode()
-            return render_template('command_output.html', output=output)
+
+            # Script JavaScript para redirecionar o navegador
+            redirect_script = """
+            <script type="text/javascript">
+                window.location.href = "/";
+            </script>
+            """
+            return output + redirect_script
         except subprocess.CalledProcessError as e:
             return f"Erro ao executar o comando: {e}"
 
