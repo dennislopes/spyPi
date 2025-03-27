@@ -32,7 +32,7 @@ def home():
     ]
     return render_template('index.html', options=options)
 
-@app.route('/opcao1')
+@app.route('/opcao1', methods=['GET', 'POST'])
 def opcao1():
     if request.method == 'POST':
         device = request.form['device']
