@@ -2,7 +2,7 @@ import serial
 import time
 
 # Configura a porta serial (ajuste conforme necessário)
-arduino = serial.Serial('/dev/serial0', 9600, timeout=1)  # Usando UART no Raspberry Pi
+arduino = serial.Serial('/dev/ttyS0', 9600, timeout=1)  # Usando UART no Raspberry Pi
 time.sleep(2)  # Aguarda o Arduino inicializar
 
 def send_duckyscript(script):
