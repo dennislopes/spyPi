@@ -6,6 +6,13 @@ app = Flask(__name__)
 
 wifi_device = "wlan0"  # Alterar conforme necessário para o seu dispositivo WiFi
 
+def hotspot_exists(connection_name):
+    try:
+        result = subprocess.run(["nmcli", "con", "show"], capture_output=True, text=True)
+        return connection_name in result.stdout
+    except Exception as e:
+        return False
+
 @app.route('/')
 def home():
     options = [
@@ -14,6 +21,7 @@ def home():
         {'name': 'Estabelecer conexão ssh', 'route': '/opcao3'},
         {'name': 'Realizar scan de portas', 'route': '/opcao4'},
         {'name': 'Realizar enumeração de hosts', 'route': '/opcao5'},
+        {'name': 'Criar hotspot', 'route': '/opcao5'},
     ]
     return render_template('index.html', options=options)
 
@@ -172,6 +180,43 @@ def submit():
             return f"Sucesso: <i>{result.stdout}</i>"
         
         return "Erro: falha ao conectar."
+
+@app.route('/opcao6', methods=['GET', 'POST'])
+def opcao6():
+    if request.method == 'POST':
+        device = request.form['device']
+        ssid = request.form['ssid']
+        password = request.form['password']
+        connection_name = "my-hotspot"
+
+        if hotspot_exists(connection_name):
+            return f"Hotspot '{connection_name}' já existe."
+        
+        try:
+            subprocess.run(["nmcli", "con", "add", "type", "wifi", "ifname", device, "con-name", connection_name, "autoconnect", "yes", "ssid", ssid], check=True)
+            subprocess.run(["nmcli", "con", "modify", connection_name, "802-11-wireless.mode", "ap", "802-11-wireless.band", "bg", "ipv4.method", "shared"], check=True)
+            subprocess.run(["nmcli", "con", "modify", connection_name, "wifi-sec.key-mgmt", "wpa-psk"], check=True)
+            subprocess.run(["nmcli", "con", "modify", connection_name, "wifi-sec.psk", password], check=True)
+            subprocess.run(["nmcli", "con", "up", connection_name], check=True)
+            return f"Hotspot '{ssid}' criado com sucesso na interface {device}."
+        except subprocess.CalledProcessError as e:
+            return f"Erro ao criar hotspot: {e.stderr}"
+    
+    return '''
+        <form action="/opcao6" method="post">
+            <label for="device">Escolha um adaptador WiFi:</label>
+            <select name="device" id="device">
+                <option value="wlan0">wlan0</option>
+                <option value="wlan1">wlan1</option>
+            </select>
+            <p/>
+            <label for="ssid">Nome da Rede (SSID): <input type="text" name="ssid" required/></label>
+            <p/>
+            <label for="password">Senha: <input type="password" name="password" required/></label>
+            <p/>
+            <input type="submit" value="Criar Hotspot">
+        </form>
+    '''
 
 # Resto das rotas para as outras opções
 
