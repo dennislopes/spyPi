@@ -158,18 +158,18 @@ def submit():
     if request.method == 'POST':
         ssid = request.form['ssid']
         password = request.form['password']
-        connection_command = ["nmcli", "--colors", "no", "device", "wifi", "connect", ssid, "ifname", wifi_device]
+        device = request.form['device']
         
-        if len(password) > 0:
-            connection_command.append("password")
-            connection_command.append(password)
+        connection_command = ["nmcli", "device", "wifi", "connect", ssid, "ifname", device]
+        if password:
+            connection_command += ["password", password]
         
-        result = subprocess.run(connection_command, capture_output=True)
+        result = subprocess.run(connection_command, capture_output=True, text=True)
         
         if result.stderr:
-            return f"Erro: falha ao conectar à rede WiFi: <i>{result.stderr.decode()}</i>"
+            return f"Erro: falha ao conectar à rede WiFi: <i>{result.stderr}</i>"
         elif result.stdout:
-            return f"Sucesso: <i>{result.stdout.decode()}</i>"
+            return f"Sucesso: <i>{result.stdout}</i>"
         
         return "Erro: falha ao conectar."
 
