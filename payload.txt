@@ -1,7 +1,7 @@
 GUI r
 DELAY
-STRING notepad
+STRING cmd
 ENTER
 DELAY
-STRING Hello from Rubber Ducky in Arduino!
+STRING ipconfig /all
 ENTER

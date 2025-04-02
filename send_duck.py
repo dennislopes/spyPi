@@ -11,21 +11,12 @@ def send_duckyscript(script):
     time.sleep(1)  # Aguarda a execução do comando
 
 def send_duckyscript_from_file(filename):
-    with open(filename, "r") as file:
+    with open(filename, "r", encoding="utf-8") as file:
         for line in file:
-            line = line.strip()
+            line = line.rstrip("\n")
             if line:
-                print(f"Enviando: {line}")
-                arduino.write((line + '\n').encode())
-                time.sleep(0.5)  # Pequeno delay entre comandos para evitar erros
+                print(f"Enviando: {repr(line)}")
+                arduino.write((line + '\n').encode("utf-8"))
+                time.sleep(1.5)  # Pequeno delay entre comandos para evitar erros
 
-# Exemplo de DuckyScript para testar
-duckyscript = """
-STRING Hello, World!
-ENTER
-DELAY 500
-STRING This is a DuckyScript example.
-ENTER
-"""
-send_duckyscript(duckyscript)
-#send_duckyscript_from_file("payload.txt")
+send_duckyscript_from_file("payload.txt")
