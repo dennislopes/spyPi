@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="SpyPi.png" alt="SpyPi" width="300">
+  <img src="static/SpyPi_Logo_v1.PNG" alt="SpyPi" width="300">
 </div>
 
 # SpyPi - Documentação do Projeto
