@@ -46,13 +46,13 @@ Para estabelecer a comunicação entre o **Raspberry Pi** e o **Arduino Pro Micr
 Abaixo, algumas telas do projeto **SpyPi**:
 
 ### Tela Inicial
-![Tela Inicial](image1.png)
+![Tela Inicial](image_1.png)
 
 ### Envio de Comandos de Teclado
-![Envio de Comandos](image2.png)
+![Envio de Comandos](image_2.png)
 
 ### Resultado do Scan de Portas
-![Resultado do Scan](image3.png)
+![Resultado do Scan](image_3.png)
 
 Essas telas ilustram algumas funcionalidades principais do **SpyPi**, permitindo interações intuitivas e eficientes com os dispositivos conectados.
 
