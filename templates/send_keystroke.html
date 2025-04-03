@@ -27,6 +27,14 @@
 </head>
 <body>
 
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (window.location.href.includes("?success=True")) {
+            history.replaceState({}, document.title, window.location.pathname);
+        }
+    });
+</script>
+
     <h2>Enviar Comando de Teclado para o Arduino</h2>
 
     {% if message %}
