@@ -105,6 +105,21 @@
             text-decoration: none;
             cursor: pointer;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
     </style>
 </head>
 <body>
@@ -147,27 +162,17 @@
             <div class="modal-content">
                 <span class="close" onclick="closeModal()">&times;</span>
                 <p><strong>Comandos suportados:</strong></p>
-                <p>
-                STRING <texto>: Digita o texto especificado caractere por caractere.<br>
-                ENTER: Pressiona a tecla Enter.<br>
-                GUI r: Simula a combinação Windows + R.<br>
-                CTRL ALT DEL: Simula a combinação Ctrl + Alt + Del.<br>
-                CTRL SHIFT ENTER: Simula a combinação Ctrl + Shift + Enter.<br>
-                LEFT: Pressiona a seta para a esquerda.<br>
-                ALT F4: Simula a combinação Alt + F4.<br>
-                DELAY <tempo>: Aguarda o tempo especificado (em milissegundos).<br>
-                </p>
-                <p><strong>Exemplo:</strong></p>
-                <p>
-                GUI r<br>
-                DELAY 500<br>
-                STRING cmd<br>
-                CTRL SHIFT ENTER<br>
-                DELAY 500<br>
-                STRING ipconfig /all<br>
-                ENTER<br>
-                ALT F4
-                </p>
+                <table>
+                    <tr><th>Comando</th><th>Descrição</th></tr>
+                    <tr><td>STRING &lt;texto&gt;</td><td>Digita o texto especificado caractere por caractere.</td></tr>
+                    <tr><td>ENTER</td><td>Pressiona a tecla Enter.</td></tr>
+                    <tr><td>GUI r</td><td>Simula a combinação Windows + R.</td></tr>
+                    <tr><td>CTRL ALT DEL</td><td>Simula a combinação Ctrl + Alt + Del.</td></tr>
+                    <tr><td>CTRL SHIFT ENTER</td><td>Simula a combinação Ctrl + Shift + Enter.</td></tr>
+                    <tr><td>LEFT</td><td>Pressiona a seta para a esquerda.</td></tr>
+                    <tr><td>ALT F4</td><td>Simula a combinação Alt + F4.</td></tr>
+                    <tr><td>DELAY &lt;tempo&gt;</td><td>Aguarda o tempo especificado (em milissegundos).</td></tr>
+                </table>
             </div>
         </div>
 
