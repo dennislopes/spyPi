@@ -1,6 +1,7 @@
 <div align="center">
   <img src="SpyPi.png" alt="Descrição da imagem">
 </div>
+
 # SpyPi - Documentação do Projeto
 
 ## Visão Geral
