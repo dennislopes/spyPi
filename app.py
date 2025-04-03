@@ -206,7 +206,8 @@ def opcao7():
         #return redirect(url_for('opcao7', success=True), code=303)  # Evita reenvio no refresh
 
     message = "Comando enviado com sucesso!" if request.args.get('success') else None
-    return render_template('send_keystroke.html', message=message)
+    #return render_template('send_keystroke.html', message=message)
+    return redirect(url_for('opcao7', success=True), code=303)
 
 
 
