@@ -3,23 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplicação Flask</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Aplicativo Principal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header, footer {
+            background-color: #4CAF50; /* Verde */
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 800px;
+        }
+        .card {
+            background-color: #fff; /* Mantendo branco */
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px;
+            width: 200px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid #ddd;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .card a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+        .card i {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 600px) {
+            .card {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
+    <header>
+        <h1>SpyPi</h1>
+    </header>
     <div class="container">
-        <h1 class="mt-5">O que vamos fazer hoje?</h1>
-        <ul class="list-group mt-3">
+        <div class="card-container">
             {% for option in options %}
-                <li class="list-group-item">
-                    <a href="{{ option.route }}">{{ option.name }}</a>
-                </li>
+                <div class="card">
+                    <a href="{{ option.route }}">
+                        <i class="{{ option.icon }}"></i>
+                        {{ option.name }}
+                    </a>
+                </div>
             {% endfor %}
-        </ul>
+        </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <footer>
+        <p>&copy; {{ year }} dennislopes@gmail.com</p>
+    </footer>
 </body>
 </html>
