@@ -1,5 +1,6 @@
 
-(SpyPi.png)
+!(SpyPi.png)
+
 # SpyPi - Documentação do Projeto
 
 ## Visão Geral
