@@ -121,10 +121,11 @@ def opcao4():
         except subprocess.CalledProcessError as e:
             output = f"Erro ao executar nmap: {e.output.decode()}"
         
-        return render_template('nmap_output.html', output=output)
+        #return render_template('nmap_output.html', output=output)
+        return redirect(url_for('home'))
     
-    #return render_template('nmap_input.html')
-    return redirect(url_for('home'))
+    return render_template('nmap_input.html')
+
 
 @app.route('/opcao5', methods=['GET', 'POST'])
 def opcao5():
