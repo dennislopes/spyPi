@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redes Wi-Fi Disponíveis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        form {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: left;
+        }
+        label, select, input[type="password"], input[type="submit"] {
+            display: block;
+            margin-bottom: 10px;
+            width: calc(100% - 12px);
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50; /* Verde */
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="/submit" method="post">
+            <h1>Redes Wi-Fi disponíveis na interface {{ device }}</h1>
+            <input type="hidden" name="device" value="{{ device }}">
+            <label for="ssid">Escolha uma rede WiFi:</label>
+            <select name="ssid" id="ssid">
+                {% if ssids %}
+                    {% for ssid in ssids %}
+                        <option value="{{ ssid }}">{{ ssid }}</option>
+                    {% endfor %}
+                {% else %}
+                    <option value="">Nenhuma rede disponível</option>
+                {% endif %}
+            </select>
+            <p/>
+            <label for="password">Senha: <input type="password" name="password" /></label>
+            <p/>
+            <input type="submit" value="Conectar">
+        </form>
+    </div>
+</body>
+</html>
