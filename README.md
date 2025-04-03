@@ -1,5 +1,3 @@
-
-
 # SpyPi - Documentação do Projeto
 
 <div align="center">
