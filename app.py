@@ -215,7 +215,7 @@ def opcao7():
                     arduino.write((cmd + '\n').encode("utf-8"))
                     time.sleep(1.5)
 
-            return redirect(url_for('opcao7', success=True))
+            return redirect(url_for('opcao7', success=True), code=303)
 
     message = "Comando enviado com sucesso!" if request.args.get('success') else None
     return render_template('send_keystroke.html', message=message, token=session.get('token'))
