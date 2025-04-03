@@ -1,0 +1,57 @@
+def sua_funcao():
+    html_string = """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Escolher Adaptador WiFi</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                background-color: #f4f4f4;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+            }
+            form {
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                width: 300px;
+                text-align: left;
+            }
+            label, select, input[type="submit"] {
+                display: block;
+                margin-bottom: 10px;
+                width: calc(100% - 12px);
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+            input[type="submit"] {
+                background-color: #4CAF50; /* Verde */
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+            input[type="submit"]:hover {
+                background-color: #45a049;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="/opcao1" method="post">
+            <label for="device">Escolha um adaptador WiFi:</label>
+            <select name="device" id="device">
+                <option value="wlan0">wlan0</option>
+                <option value="wlan1">wlan1</option>
+            </select>
+            <input type="submit" value="Buscar Redes">
+        </form>
+    </body>
+    </html>
+    """
+    return html_string
