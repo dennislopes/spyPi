@@ -88,6 +88,12 @@ Abaixo estão algumas capturas de tela da interface do SpyPi:
 ### Resultado do Scan de Portas
 ![Scan de Portas](image_3.png)
 
+## Futuro
+
+Para expandir as funcionalidades da ferramenta, pretende-se implementar novos comandos que ampliem as capacidades de exploração e automação, permitindo maior controle sobre redes e dispositivos-alvo. Algumas das melhorias previstas incluem aprimoramentos na detecção de vulnerabilidades, otimização do gerenciamento de conexões sem fio e integração de novos métodos de persistência e movimentação lateral.
+Além disso, um dos principais desenvolvimentos futuros será um fork do projeto voltado exclusivamente para a automação de ataques no estilo Rubber Ducky. A ideia é criar uma versão mais enxuta e portátil, utilizando o Raspberry Pi Zero ou o Orange Pi Zero, com preferência pelo Orange Pi devido ao seu custo reduzido. Essa abordagem tornaria o dispositivo mais discreto e acessível, facilitando implantações em cenários diversos.
+
+
 ## Contato
 Desenvolvido por **dennislopes@gmail.com**
 
