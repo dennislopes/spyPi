@@ -81,15 +81,7 @@ def opcao1():
 
     # Quando o método é GET, apenas exibe o formulário de seleção
     return '''
-        <form action="/opcao1" method="post">
-            <label for="device">Escolha um adaptador WiFi:</label>
-            <select name="device" id="device">
-                <option value="wlan0">wlan0</option>
-                <option value="wlan1">wlan1</option>
-            </select>
-            <input type="submit" value="Buscar Redes">
-        </form>
-    '''
+    return render_template('select_wifi.html')
 
 @app.route('/opcao2', methods=['GET', 'POST'])
 def opcao2():
