@@ -166,7 +166,7 @@ def opcao6():
         except subprocess.CalledProcessError as e:
             return f"Erro ao criar hotspot: {e.stderr}"
     
-    return render_template('select_wifi.html')
+    return render_template('create_hotspot.html')
 
 @app.route('/opcao7', methods=['GET', 'POST'])
 def opcao7():
