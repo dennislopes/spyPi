@@ -123,8 +123,8 @@ def opcao4():
         
         return render_template('nmap_output.html', output=output)
     
-    return render_template('nmap_input.html')
-
+    #return render_template('nmap_input.html')
+    return redirect(url_for('home'))
 
 @app.route('/opcao5', methods=['GET', 'POST'])
 def opcao5():
