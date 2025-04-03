@@ -29,9 +29,6 @@ Configura um ponto de acesso Wi-Fi no dispositivo, permitindo que outros disposi
 ### 7. Enviar Comandos de Teclado
 Permite enviar comandos simulando um teclado via um Arduino Pro Micro configurado como um dispositivo HID. Os comandos seguem a sintaxe do Rubber Ducky, possibilitando a automação de tarefas e execução de scripts automáticos. O suporte aos comandos ainda está limitado, sendo os seguintes comandos suportados:
 
-## Comandos Suportados na Opção de Teclado
-A funcionalidade de envio de comandos de teclado permite que o Raspberry Pi envie sequências de teclas para um computador utilizando um Arduino configurado como um dispositivo HID. Atualmente, os seguintes comandos são suportados:
-
 - `STRING <texto>`: Digita o texto especificado caractere por caractere.
 - `ENTER`: Pressiona a tecla Enter.
 - `GUI r`: Simula a combinação `Windows + R`.
