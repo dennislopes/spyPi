@@ -1,12 +1,9 @@
 # SpyPi - Documentação do Projeto
-
+## Visão Geral
+SpyPi é uma interface baseada em Flask para executar comandos de rede e automação em um Raspberry Pi ou Arduino Pro Micro. O sistema permite configurações de Wi-Fi, execução de comandos remotos, análise de rede, e envio de comandos de teclado simulando um Rubber Ducky.
 <div align="center">
   <img src="SpyPi.png" alt="Descrição da imagem">
 </div>
-
-## Visão Geral
-SpyPi é uma interface baseada em Flask para executar comandos de rede e automação em um Raspberry Pi ou Arduino Pro Micro. O sistema permite configurações de Wi-Fi, execução de comandos remotos, análise de rede, e envio de comandos de teclado simulando um Rubber Ducky.
-
 ## Funcionalidades
 
 ### 1. Configurar Wi-Fi
