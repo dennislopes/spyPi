@@ -188,24 +188,36 @@ def opcao6():
 @app.route('/opcao7', methods=['GET', 'POST'])
 def opcao7():
     """Interface para enviar comandos de teclado ao Arduino."""
-    message = None
+    
+    # Garante que cada submissão seja única
+    if request.method == 'GET':
+        session['token'] = str(uuid.uuid4())
+
     if request.method == 'POST':
-        command = request.form['command']  # Obtém o texto do textarea
-        commands = command.strip().split("\n")  # Divide os comandos corretamente por linha
+        form_token = request.form.get("token")
+        
+        # Evita o reenvio duplicado verificando se o token já foi usado
+        if form_token != session.get('token'):
+            return redirect(url_for('opcao7'))
+
+        session.pop('token', None)  # Remove o token da sessão após o uso
+
+        command = request.form['command']
+        commands = command.strip().split("\n")  # Divide os comandos corretamente
         
         if arduino:
             for cmd in commands:
                 cmd = cmd.strip()
                 if cmd:
-                    print(f"Enviando: {repr(cmd)}")  # Debug
+                    print(f"Enviando: {repr(cmd)}")
                     arduino.write((cmd + '\n').encode("utf-8"))
-                    time.sleep(1.5)  # Delay entre os comandos
+                    time.sleep(1.5)
 
-            # Redireciona para evitar reenvio do formulário
             return redirect(url_for('opcao7', success=True))
 
     message = "Comando enviado com sucesso!" if request.args.get('success') else None
-    return render_template('send_keystroke.html', message=message)
+    return render_template('send_keystroke.html', message=message, token=session.get('token'))
+
 
 
 @app.route('/submit', methods=['POST'])
