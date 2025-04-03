@@ -33,11 +33,21 @@ try:
 except serial.SerialException:
     arduino = None
 
+#def send_keystroke(command):
+#    """Envia um comando de teclado ao Arduino via serial."""
+#    if arduino and arduino.isOpen():
+#        arduino.write((command + '\n').encode())
+#        time.sleep(0.5)
+
 def send_keystroke(command):
-    """Envia um comando de teclado ao Arduino via serial."""
-    if arduino and arduino.isOpen():
-        arduino.write((command + '\n').encode())
-        time.sleep(0.5)
+    try:
+        with serial.Serial('/dev/ttyS0', 9600, timeout=1) as arduino:
+            time.sleep(2)  # Aguarda estabilização da conexão
+            arduino.write((command + '\n').encode())
+            time.sleep(0.5)
+    except serial.SerialException as e:
+        print(f"Erro na comunicação serial: {e}")
+
 
 @app.route('/')
 def home():
