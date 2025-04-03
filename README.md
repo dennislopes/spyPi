@@ -1,76 +1,61 @@
-# SpyPi
+# Projeto SpyPi
 
-SpyPi é um sistema baseado em Flask que oferece diversas funcionalidades para administração remota, testes de segurança e interação com um dispositivo Arduino. O sistema inclui opções para configuração de Wi-Fi, execução de comandos remotos, criação de um hotspot e envio de comandos de teclado via Arduino.
+## Descrição
+O **SpyPi** é uma interface web desenvolvida para rodar em um **Raspberry Pi**, permitindo a execução de diversos comandos de rede e automação. O projeto integra funcionalidades como:
 
-## Funcionalidades
+- Configuração de Wi-Fi
+- Execução de comandos de shell
+- Abertura de uma shell reversa
+- Scan de portas
+- Enumeração de hosts
+- Criação de hotspot
+- Envio de comandos de teclado via um Arduino Pro Micro
 
-- **Configurar Wi-Fi**: Lista redes Wi-Fi e permite conectar a uma rede específica.
-- **Executar um comando de Shell**: Permite executar comandos no sistema e visualizar a saída.
-- **Abrir uma shell reversa**: Estabelece uma conexão reversa para um IP e porta específicos.
-- **Realizar scan de portas**: Utiliza `nmap` para escanear portas em um host remoto.
-- **Realizar enumeração de hosts**: Identifica hosts ativos na rede usando `nmap`.
-- **Criar hotspot**: Configura um hotspot Wi-Fi utilizando `nmcli`.
-- **Enviar Comandos de Teclado**: Envia sequências de comandos via Arduino para simular entrada de teclado.
+## Tecnologias Utilizadas
+- **Raspberry Pi** como servidor principal
+- **Arduino Pro Micro** para envio de comandos de teclado
+- **Flask** para criação da interface web
+- **nmcli** para gerenciamento de redes Wi-Fi e hotspot
+- **Nmap** para escaneamento de portas e enumeração de hosts
+- **UART** para comunicação entre dispositivos
 
-## Instalação
+## Configuração da Conexão via UART
+Para estabelecer a comunicação entre o **Raspberry Pi** e o **Arduino Pro Micro**, utilizamos a interface **UART**. Os passos básicos incluem:
 
-Certifique-se de ter o Python 3 instalado e as dependências necessárias:
+1. **Habilitar a UART no Raspberry Pi:**
+   - Editar o arquivo `/boot/config.txt` e adicionar:
+     ```
+     enable_uart=1
+     ```
+   - Desativar o console serial no `raspi-config` caso esteja ativado.
+   
+2. **Conectar os pinos corretamente:**
+   - **Raspberry Pi TX (GPIO 14) → Arduino RX**
+   - **Raspberry Pi RX (GPIO 15) → Arduino TX**
+   - **GND → GND**
 
-```bash
-sudo apt update && sudo apt install python3 python3-pip python3-serial nmap netcat
-pip install flask
-```
+3. **Testar a comunicação:**
+   - No Raspberry Pi, utilizar:
+     ```sh
+     sudo apt install minicom
+     minicom -b 115200 -o -D /dev/serial0
+     ```
+   - No Arduino, configurar o monitor serial na mesma taxa de transmissão.
 
-## Uso
+## Interface Web
+Abaixo, algumas telas do projeto **SpyPi**:
 
-1. Clone este repositório:
-   ```bash
-   git clone https://github.com/dennislopes/spyPi.git
-   cd spyPi
-   ```
-2. Inicie o servidor Flask:
-   ```bash
-   python3 app.py
-   ```
-3. Acesse no navegador:
-   ```
-   http://<IP-DO-RASPBERRY>:5000
-   ```
+### Tela Inicial
+![Tela Inicial](image1.png)
 
-## Configuração do Arduino
+### Envio de Comandos de Teclado
+![Envio de Comandos](image2.png)
 
-Se estiver usando um Arduino para envio de comandos de teclado, conecte-o via porta serial `/dev/ttyS0`. Certifique-se de que o Arduino está rodando um firmware compatível com emulação de teclado.
+### Resultado do Scan de Portas
+![Resultado do Scan](image3.png)
 
-## Estrutura do Projeto
+Essas telas ilustram algumas funcionalidades principais do **SpyPi**, permitindo interações intuitivas e eficientes com os dispositivos conectados.
 
-```
-spyPi/
-├── templates/            # Arquivos HTML para renderização
-├── static/               # Arquivos estáticos (CSS, JS)
-├── app.py                # Servidor Flask
-├── README.md             # Documentação do projeto
-```
-
-## Exemplo de Uso
-
-Para enviar comandos de teclado via Arduino:
-
-1. Acesse `http://<IP-DO-RASPBERRY>:5000/opcao7`
-2. Insira os comandos desejados, como:
-   ```
-   GUI r
-   STRING cmd
-   ENTER
-   STRING ipconfig /all
-   ENTER
-   ```
-3. O Arduino irá processar os comandos e enviá-los ao sistema como entrada de teclado.
-
-## Contribuição
-
-Pull requests são bem-vindos! Para grandes mudanças, abra uma issue primeiro para discutir o que deseja modificar.
-
-## Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+## Conclusão
+O **SpyPi** é um projeto versátil que permite realizar diversas operações de rede e automação diretamente via uma interface web. Com a integração do **Raspberry Pi** e **Arduino Pro Micro**, é possível expandir ainda mais as funcionalidades para atender diferentes cenários de uso.
 
