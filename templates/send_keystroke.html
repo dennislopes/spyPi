@@ -15,6 +15,7 @@
 <form action="/opcao7" method="post">
     <label for="command">Digite os comandos do teclado (um por linha):</label><br>
     <textarea name="command" rows="8" cols="50" required></textarea><br>
+    <input type="hidden" name="token" value="{{ token }}">  <!-- Token para evitar reenvios -->
     <input type="submit" value="Enviar">
 </form>
 
