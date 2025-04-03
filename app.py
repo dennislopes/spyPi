@@ -80,7 +80,7 @@ def opcao1():
         return render_template('wifi_list.html', ssids=ssids, device=device)
 
     # Quando o método é GET, apenas exibe o formulário de seleção
-    return render_template('select_wifi.html')
+    return render_template('select_wlan.html')
 
 @app.route('/opcao2', methods=['GET', 'POST'])
 def opcao2():
@@ -166,17 +166,7 @@ def opcao6():
         except subprocess.CalledProcessError as e:
             return f"Erro ao criar hotspot: {e.stderr}"
     
-    return '''
-        <form action="/opcao6" method="post">
-            <label for="device">Escolha um adaptador WiFi:</label>
-            <select name="device" id="device">
-                <option value="wlan0">wlan0</option>
-                <option value="wlan1">wlan1</option>
-            </select>
-            <p/>
-            <input type="submit" value="Criar/Recriar Hotspot">
-        </form>
-    '''
+    return render_template('select_wifi.html')
 
 @app.route('/opcao7', methods=['GET', 'POST'])
 def opcao7():
