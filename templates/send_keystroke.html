@@ -72,6 +72,32 @@
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
+                .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            border-bottom: 1px dotted black;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 260px;
+            background-color: #333;
+            color: #fff;
+            text-align: left;
+            padding: 10px;
+            border-radius: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -97,7 +123,27 @@
 
         <form action="/opcao7" method="post">
             <fieldset>
-                <label for="command">Digite um comando por linha:</label><br>
+                <label for="command" class="tooltip">Digite um comando por linha:
+                    <span class="tooltiptext">
+                        STRING <texto>: Digita o texto especificado caractere por caractere.<br>
+                        ENTER: Pressiona a tecla Enter.<br>
+                        GUI r: Simula a combinação Windows + R.<br>
+                        CTRL ALT DEL: Simula a combinação Ctrl + Alt + Del.<br>
+                        CTRL SHIFT ENTER: Simula a combinação Ctrl + Shift + Enter.<br>
+                        LEFT: Pressiona a seta para a esquerda.<br>
+                        ALT F4: Simula a combinação Alt + F4.<br>
+                        DELAY <tempo>: Aguarda o tempo especificado (em milissegundos).<br><br>
+                        <strong>Exemplo:</strong><br>
+                        GUI r<br>
+                        DELAY 500<br>
+                        STRING cmd<br>
+                        CTRL SHIFT ENTER<br>
+                        DELAY 500<br>
+                        STRING ipconfig /all<br>
+                        ENTER<br>
+                        ALT F4
+                    </span>
+                </label><br>
                 <textarea name="command" rows="8" required></textarea><br>
                 <input type="submit" id="sendButton" value="Enviar">
             </fieldset>
