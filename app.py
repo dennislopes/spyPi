@@ -3,6 +3,7 @@ import subprocess
 import threading
 import serial
 import time
+import uuid      # Para gerar tokens únicos
 
 app = Flask(__name__)
 
