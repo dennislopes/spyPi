@@ -33,6 +33,7 @@ def home():
         {'name': 'Realizar scan de portas', 'route': '/opcao4'},
         {'name': 'Realizar enumeração de hosts', 'route': '/opcao5'},
         {'name': 'Criar hotspot', 'route': '/opcao6'},
+        {'name': 'Enviar Comandos de Teclado', 'route': '/opcao7'},
     ]
     return render_template('index.html', options=options)
 
@@ -158,6 +159,20 @@ def opcao6():
             <input type="submit" value="Criar/Recriar Hotspot">
         </form>
     '''
+
+@app.route('/opcao7', methods=['GET', 'POST'])
+def opcao7():
+    """Interface para enviar comandos de teclado ao Arduino."""
+    message = None
+    if request.method == 'POST':
+        command = request.form['command']
+        if arduino:
+            send_keystroke(command)
+            message = f"Comando '{command}' enviado ao Arduino."
+        else:
+            message = "Erro: Conexão com Arduino não disponível."
+
+    return render_template('send_keystroke.html', message=message)
 
 
 @app.route('/submit', methods=['POST'])
