@@ -77,6 +77,9 @@
             position: relative;
             display: inline-block;
             cursor: pointer;
+            color: #007BFF;
+            text-decoration: underline;
+            margin-top: 10px;
         }
         .tooltip .tooltiptext {
             visibility: hidden;
@@ -88,8 +91,9 @@
             padding: 10px;
             position: absolute;
             z-index: 1;
-            bottom: -110px;
-            left: 0;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
             opacity: 0;
             transition: opacity 0.3s;
         }
@@ -122,32 +126,34 @@
 
         <form action="/opcao7" method="post">
             <fieldset>
-                <label for="command" class="tooltip">Digite um comando por linha:
-                    <span class="tooltiptext">
-                        STRING <texto>: Digita o texto especificado caractere por caractere.<br>
-                        ENTER: Pressiona a tecla Enter.<br>
-                        GUI r: Simula a combinação Windows + R.<br>
-                        CTRL ALT DEL: Simula a combinação Ctrl + Alt + Del.<br>
-                        CTRL SHIFT ENTER: Simula a combinação Ctrl + Shift + Enter.<br>
-                        LEFT: Pressiona a seta para a esquerda.<br>
-                        ALT F4: Simula a combinação Alt + F4.<br>
-                        DELAY <tempo>: Aguarda o tempo especificado (em milissegundos).<br>
-                        <br>
-                        Exemplo:<br>
-                        GUI r<br>
-                        DELAY 500<br>
-                        STRING cmd<br>
-                        CTRL SHIFT ENTER<br>
-                        DELAY 500<br>
-                        STRING ipconfig /all<br>
-                        ENTER<br>
-                        ALT F4
-                    </span>
-                </label><br>
+                <label for="command">Digite um comando por linha:</label><br>
                 <textarea name="command" rows="8" required></textarea><br>
                 <input type="submit" id="sendButton" value="Enviar">
             </fieldset>
         </form>
+
+        <div class="tooltip">Ajuda
+            <span class="tooltiptext">
+                STRING <texto>: Digita o texto especificado caractere por caractere.<br>
+                ENTER: Pressiona a tecla Enter.<br>
+                GUI r: Simula a combinação Windows + R.<br>
+                CTRL ALT DEL: Simula a combinação Ctrl + Alt + Del.<br>
+                CTRL SHIFT ENTER: Simula a combinação Ctrl + Shift + Enter.<br>
+                LEFT: Pressiona a seta para a esquerda.<br>
+                ALT F4: Simula a combinação Alt + F4.<br>
+                DELAY <tempo>: Aguarda o tempo especificado (em milissegundos).<br>
+                <br>
+                Exemplo:<br>
+                GUI r<br>
+                DELAY 500<br>
+                STRING cmd<br>
+                CTRL SHIFT ENTER<br>
+                DELAY 500<br>
+                STRING ipconfig /all<br>
+                ENTER<br>
+                ALT F4
+            </span>
+        </div>
 
         <a href="/">Voltar para o início</a>
     </div>
