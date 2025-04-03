@@ -200,10 +200,11 @@ def opcao7():
                     print(f"Enviando: {repr(cmd)}")  # Debug
                     arduino.write((cmd + '\n').encode("utf-8"))
                     time.sleep(1.5)  # Delay entre os comandos
-            message = "Comandos enviados com sucesso!"
-        else:
-            message = "Erro: Conexão com Arduino não disponível."
 
+            # Redireciona para evitar reenvio do formulário
+            return redirect(url_for('opcao7', success=True))
+
+    message = "Comando enviado com sucesso!" if request.args.get('success') else None
     return render_template('send_keystroke.html', message=message)
 
 
