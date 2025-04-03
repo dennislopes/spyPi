@@ -203,18 +203,11 @@ def opcao7():
                     arduino.write((cmd + '\n').encode("utf-8"))
                     time.sleep(1.5)
 
-        # Redireciona apenas no POST, sem criar um loop no GET
-        return redirect(url_for('opcao7') + "?success=True", code=303)
+        # Redireciona para evitar reenvio do formulário (usando 302)
+        return redirect(url_for('opcao7'), code=302)
 
-    # Apenas exibe a mensagem se vier de um POST
-    message = None
-    if request.args.get('success'):
-        message = "Comando enviado com sucesso!"
-
-    return render_template('send_keystroke.html', message=message)
-
-    #message = "Comando enviado com sucesso!" if request.args.get('success') else None
-    #return redirect(url_for('opcao7', success=True), code=303)
+    # GET: Apenas exibe a página normalmente
+    return render_template('send_keystroke.html')
 
 
 
