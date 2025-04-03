@@ -1,12 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for
 import subprocess
 import threading
 import serial
 import time
-import uuid      # Para gerar tokens únicos
+
 
 app = Flask(__name__)
-app.secret_key = "chave_super_secreta_123"  # Defina uma chave única e segura
+
 
 wifi_device = "wlan0"  # Alterar conforme necessário para o seu dispositivo WiFi
 
@@ -191,19 +191,7 @@ def opcao6():
 def opcao7():
     """Interface para enviar comandos de teclado ao Arduino."""
     
-    # Garante que cada submissão seja única
-    if request.method == 'GET':
-        session['token'] = str(uuid.uuid4())
-
     if request.method == 'POST':
-        form_token = request.form.get("token")
-        
-        # Evita o reenvio duplicado verificando se o token já foi usado
-        if form_token != session.get('token'):
-            return redirect(url_for('opcao7'))
-
-        session.pop('token', None)  # Remove o token da sessão após o uso
-
         command = request.form['command']
         commands = command.strip().split("\n")  # Divide os comandos corretamente
         
@@ -215,10 +203,10 @@ def opcao7():
                     arduino.write((cmd + '\n').encode("utf-8"))
                     time.sleep(1.5)
 
-            return redirect(url_for('opcao7', success=True), code=303)
+        return redirect(url_for('opcao7', success=True), code=303)  # Evita reenvio no refresh
 
     message = "Comando enviado com sucesso!" if request.args.get('success') else None
-    return render_template('send_keystroke.html', message=message, token=session.get('token'))
+    return render_template('send_keystroke.html', message=message)
 
 
 
