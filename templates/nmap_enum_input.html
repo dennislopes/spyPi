@@ -2,15 +2,62 @@
 <html>
 <head>
     <title>Scan de Portas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: left;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label, input[type="text"], input[type="submit"] {
+            display: block;
+            margin-bottom: 10px;
+            width: calc(100% - 12px);
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50; /* Verde */
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        br {
+            display: none; /* Remover quebras de linha padrão */
+        }
+    </style>
 </head>
 <body>
-    <h1>Digite os dados para o scan</h1>
-    <form action="/opcao5" method="post">
-        <label for="network">Rede (Exemplo: 192.168.0.0/24):</label>
-        <input type="text" id="network" name="network" required>
-        <br>
-        <input type="submit" value="Executar Scan">
-    </form>
+    <div class="container">
+        <h1>Digite os dados para o scan</h1>
+        <form action="/opcao4" method="post">
+            <label for="host">Host:</label>
+            <input type="text" id="host" name="host" required>
+            <label for="ports">Portas (ex: 23 ou 23,27,1000 ou 23-999):</label>
+            <input type="text" id="ports" name="ports" required>
+            <input type="submit" value="Executar Scan">
+        </form>
+    </div>
 </body>
 </html>
-
