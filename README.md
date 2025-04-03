@@ -74,7 +74,7 @@ sudo systemctl stop serial-getty@ttyS0.service
 No Python, a comunicação pode ser feita com a biblioteca `pyserial`:
 ```python
 import serial
-ser = serial.Serial('/dev/serial0', 115200, timeout=1)
+ser = serial.Serial('/dev/ttyS0', 115200, timeout=1)
 ser.write(b'Hello UART!\n')
 ser.close()
 ```
