@@ -6,6 +6,7 @@ import time
 import uuid      # Para gerar tokens únicos
 
 app = Flask(__name__)
+app.secret_key = "chave_super_secreta_123"  # Defina uma chave única e segura
 
 wifi_device = "wlan0"  # Alterar conforme necessário para o seu dispositivo WiFi
 
