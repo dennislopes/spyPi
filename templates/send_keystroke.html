@@ -22,6 +22,7 @@
             width: 300px;
             text-align: left;
             margin-top: 20px;
+            position: relative;
         }
         h2 {
             text-align: center;
@@ -72,25 +73,23 @@
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
-                .tooltip {
+        .tooltip {
             position: relative;
             display: inline-block;
             cursor: pointer;
-            border-bottom: 1px dotted black;
         }
         .tooltip .tooltiptext {
             visibility: hidden;
             width: 260px;
-            background-color: #333;
+            background-color: #555;
             color: #fff;
             text-align: left;
-            padding: 10px;
             border-radius: 5px;
+            padding: 10px;
             position: absolute;
             z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: -110px;
+            left: 0;
             opacity: 0;
             transition: opacity 0.3s;
         }
@@ -132,8 +131,9 @@
                         CTRL SHIFT ENTER: Simula a combinação Ctrl + Shift + Enter.<br>
                         LEFT: Pressiona a seta para a esquerda.<br>
                         ALT F4: Simula a combinação Alt + F4.<br>
-                        DELAY <tempo>: Aguarda o tempo especificado (em milissegundos).<br><br>
-                        <strong>Exemplo:</strong><br>
+                        DELAY <tempo>: Aguarda o tempo especificado (em milissegundos).<br>
+                        <br>
+                        Exemplo:<br>
                         GUI r<br>
                         DELAY 500<br>
                         STRING cmd<br>
