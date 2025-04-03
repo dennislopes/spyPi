@@ -1,5 +1,4 @@
-
-!(SpyPi.png)
+![SpyPi](SpyPi.png)
 
 # SpyPi - Documentação do Projeto
 
