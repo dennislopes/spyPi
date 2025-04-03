@@ -39,7 +39,7 @@
             box-sizing: border-box;
         }
         input[type="submit"] {
-            background-color: #4CAF50; /* Verde */
+            background-color: #4CAF50;
             color: white;
             border: none;
             cursor: pointer;
@@ -73,33 +73,37 @@
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-            color: #007BFF;
-            text-decoration: underline;
-            margin-top: 10px;
-        }
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 260px;
-            background-color: #555;
-            color: #fff;
-            text-align: left;
-            border-radius: 5px;
-            padding: 10px;
-            position: absolute;
+        .modal {
+            display: none;
+            position: fixed;
             z-index: 1;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
         }
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 8px;
+            text-align: left;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -112,6 +116,12 @@
                     history.replaceState({}, document.title, window.location.pathname);
                 }
             });
+            function openModal() {
+                document.getElementById("helpModal").style.display = "block";
+            }
+            function closeModal() {
+                document.getElementById("helpModal").style.display = "none";
+            }
         </script>
 
         <h2>Enviar Comando de Teclado para o Arduino</h2>
@@ -132,8 +142,12 @@
             </fieldset>
         </form>
 
-        <div class="tooltip">Ajuda
-            <span class="tooltiptext">
+        <p><a href="#" onclick="openModal()">Ajuda</a></p>
+        <div id="helpModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <p><strong>Comandos suportados:</strong></p>
+                <p>
                 STRING <texto>: Digita o texto especificado caractere por caractere.<br>
                 ENTER: Pressiona a tecla Enter.<br>
                 GUI r: Simula a combinação Windows + R.<br>
@@ -142,8 +156,9 @@
                 LEFT: Pressiona a seta para a esquerda.<br>
                 ALT F4: Simula a combinação Alt + F4.<br>
                 DELAY <tempo>: Aguarda o tempo especificado (em milissegundos).<br>
-                <br>
-                Exemplo:<br>
+                </p>
+                <p><strong>Exemplo:</strong></p>
+                <p>
                 GUI r<br>
                 DELAY 500<br>
                 STRING cmd<br>
@@ -152,7 +167,8 @@
                 STRING ipconfig /all<br>
                 ENTER<br>
                 ALT F4
-            </span>
+                </p>
+            </div>
         </div>
 
         <a href="/">Voltar para o início</a>
