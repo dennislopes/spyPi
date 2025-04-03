@@ -190,10 +190,17 @@ def opcao7():
     """Interface para enviar comandos de teclado ao Arduino."""
     message = None
     if request.method == 'POST':
-        command = request.form['command']
+        command = request.form['command']  # Obtém o texto do textarea
+        commands = command.strip().split("\n")  # Divide os comandos corretamente por linha
+        
         if arduino:
-            send_keystroke(command)
-            message = f"Comando '{command}' enviado ao Arduino."
+            for cmd in commands:
+                cmd = cmd.strip()
+                if cmd:
+                    print(f"Enviando: {repr(cmd)}")  # Debug
+                    arduino.write((cmd + '\n').encode("utf-8"))
+                    time.sleep(1.5)  # Delay entre os comandos
+            message = "Comandos enviados com sucesso!"
         else:
             message = "Erro: Conexão com Arduino não disponível."
 
