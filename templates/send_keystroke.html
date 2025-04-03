@@ -4,22 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enviar Comando de Teclado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        textarea {
+            width: 100%;
+            max-width: 500px;
+        }
+        input[type="submit"] {
+            margin-top: 10px;
+            padding: 8px 15px;
+            font-size: 16px;
+        }
+        a {
+            display: block;
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
+
     <h2>Enviar Comando de Teclado para o Arduino</h2>
-    
+
     {% if message %}
         <p style="color: green;"><strong>{{ message }}</strong></p>
     {% endif %}
-    
-<form action="/opcao7" method="post">
-    <label for="command">Digite os comandos do teclado (um por linha):</label><br>
-    <textarea name="command" rows="8" cols="50" required></textarea><br>
-    <input type="hidden" name="token" value="{{ token }}">  <!-- Token para evitar reenvios -->
-    <input type="submit" value="Enviar">
-</form>
 
-    <br>
+    <form action="/opcao7" method="post">
+        <fieldset>
+            <label for="command">Digite os comandos do teclado (um por linha):</label><br>
+            <textarea name="command" rows="8" required></textarea><br>
+            <input type="submit" id="sendButton" value="Enviar">
+        </fieldset>
+    </form>
+
     <a href="/">Voltar para o início</a>
+
 </body>
 </html>
